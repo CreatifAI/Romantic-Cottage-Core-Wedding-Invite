@@ -98,12 +98,12 @@ body.lock{overflow:hidden;height:100vh}
 @keyframes twinkle{0%,100%{transform:scale(0) rotate(0);opacity:0}50%{transform:scale(1.2) rotate(90deg);opacity:1}}
 @keyframes fly{0%,100%{transform:translate(-3px,3px) rotate(-8deg)}50%{transform:translate(3px,-3px) rotate(8deg)}}
 @keyframes trav{0%{top:0;left:-11px}25%{left:-4px}50%{top:50%;left:-16px}75%{left:-4px}100%{top:calc(100% - 20px);left:-11px}}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:40px 26px;margin-top:20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,340px));justify-content:center;gap:40px 26px;margin-top:20px}
 .card{position:relative;background:#fffdf8;padding:36px 22px 28px;border:1px solid #ead9c0;box-shadow:0 14px 36px rgba(185,112,126,.16)}
 .card::before{content:'';position:absolute;inset:8px;border:1.5px dotted var(--gold);pointer-events:none}
 .card::after{content:'';position:absolute;left:-1px;right:-1px;top:-10px;height:10px;background:radial-gradient(circle at 10px 10px,#fffdf8 9px,transparent 10px) repeat-x;background-size:20px 10px}
 .card .ic{font-size:2.2rem}.card h3{font-size:1.7rem;color:var(--rosed);margin:4px 0}.card .t{font-weight:600;color:var(--gold)}
-.card.note{grid-column:1/-1;justify-self:center;width:min(100%,560px);background:#f8edd8;margin-top:6px}
+.card.note{width:min(100%,560px);background:#f8edd8;margin:44px auto 0}
 .card.note::after{left:50%;right:auto;top:-13px;width:120px;height:26px;margin-left:-60px;background:repeating-linear-gradient(45deg,rgba(217,154,165,.6) 0 8px,rgba(255,255,255,.55) 8px 16px);background-size:auto;transform:rotate(-2deg)}
 .card.note p{font-style:italic}
 .sw{display:flex;gap:10px;justify-content:center;margin-top:14px}
@@ -144,6 +144,7 @@ input:focus,select:focus,textarea:focus,.btn:focus-visible{outline:2px solid var
 .close{position:relative;text-align:center;padding:110px 22px;overflow:hidden}
 .close .ph{position:absolute;inset:0}.close::before{content:'';position:absolute;inset:0;z-index:1;background:rgba(252,246,236,.82)}
 .close .in{position:relative;z-index:2}.close .script{font-size:clamp(2.4rem,9vw,3.8rem);color:var(--rosed)}
+footer a{color:var(--rosed);font-weight:600;text-decoration:none;border-bottom:1px solid var(--gold)}
 footer{padding:18px;text-align:center;font-size:.85rem;font-style:italic;background:#f3e3e5}
 #music{position:fixed;right:16px;bottom:16px;z-index:70;width:48px;height:48px;border-radius:50%;border:1.5px solid var(--gold);background:#fffdf8;color:var(--rosed);font-size:1.3rem;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.15);display:none}
 body.entered #music{display:block}#music.off{opacity:.55;text-decoration:line-through}
@@ -197,8 +198,8 @@ body.entered #music{display:block}#music.off{opacity:.55;text-decoration:line-th
       <div class="card reveal" data-event="ceremony"><div class="ic">⛪</div><h3>The Ceremony</h3><div class="t">4:00 PM</div><p><span data-c="chapel"></span><br>Vows beneath the garden arch. Please arrive by 3:30.</p></div>
       <div class="card reveal" data-event="tea"><div class="ic">🥂</div><h3>Garden Tea &amp; Toasts</h3><div class="t">5:00 PM</div><p>The Rose Garden<br>Sip, mingle, and share a smile with us.</p></div>
       <div class="card reveal" data-event="dinner"><div class="ic">🕯️</div><h3>Dinner &amp; Dancing</h3><div class="t">6:30 PM</div><p><span data-c="reception"></span><br>Candlelight, music, and a first dance we hope you'll join.</p></div>
-      <div class="card note reveal"><div class="ic">🧺</div><h3>Dress Code</h3><div class="t">Garden Pastels</div><p>Blush, sage, dusty blue or cream. Please leave white for the bride.</p><div class="sw"><i style="background:#f2c4cc"></i><i style="background:#b9cba9"></i><i style="background:#a9c1d6"></i><i style="background:#f6ecd8"></i></div></div>
-    </div>
+      </div>
+    <div class="card note reveal"><div class="ic">🧺</div><h3>Dress Code</h3><div class="t">Garden Pastels</div><p>Blush, sage, dusty blue or cream. Please leave white for the bride.</p><div class="sw"><i style="background:#f2c4cc"></i><i style="background:#b9cba9"></i><i style="background:#a9c1d6"></i><i style="background:#f6ecd8"></i></div></div>
   </section>
 
   <div class="band alt"><section class="sec">
@@ -238,7 +239,7 @@ body.entered #music{display:block}#music.off{opacity:.55;text-decoration:line-th
     <div class="ph" data-img="closing" data-ph="Closing photo (closing)"></div>
     <div class="in reveal"><div class="script">With all our love,</div><div class="script" style="font-size:2.6rem"><span data-c="bride"></span> &amp; <span data-c="groom"></span></div><p style="margin-top:14px;font-style:italic">“Whoever loves, lives in God, and God in them.” (1 John 4:16)</p><p style="margin-top:8px;color:var(--gold)">#ElianaAndJonathanForever</p></div>
   </section>
-  <footer>Demo invitation designed by Shagna Invites</footer>
+  <footer>Designed by <a href="https://shagnainvites.com" target="_blank" rel="noopener">Shagna Invites</a></footer>
   <button id="music" aria-label="Toggle music">♪</button>
 </main>
 
@@ -250,6 +251,11 @@ window.SHAGNA={
 };
 </script>
 <script src="js/shagna-guest.js"></script>
+<!-- DEMO BAR: demo:true shows the Shagna bar and sends demo RSVPs to Shagna's WhatsApp. Set demo:false for customer delivery. -->
+<script>
+window.SHAGNA_SITE={demo:true,name:'Romantic Interactive Cottage Core Wedding Invite',home:'https://shagnainvites.com',catalogue:'https://shagnainvites.com/our-invitations/',whatsapp:'919650092852'};
+</script>
+<script src="js/shagna-demo.js"></script>
 <script>
 /* =====================  EDIT EVERYTHING HERE  ===================== */
 const CONFIG = {
@@ -355,8 +361,8 @@ $('#rsvp').addEventListener('submit',async e=>{
   if(CONFIG.formEndpoint){
     try{await fetch(CONFIG.formEndpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})}catch(err){}
   }else{
-    const txt=`Hello! This is ${data.name}${data.invited?' ('+data.invited+')':''}. ${data.answer}. Guests: ${data.guests}.${data.message?' Message: '+data.message:''}`;
-    window.open('https://wa.me/'+CONFIG.whatsapp+'?text='+encodeURIComponent(txt),'_blank');
+    const demo=window.SHAGNA_SITE&&SHAGNA_SITE.demo,txt=(demo?'[DEMO RSVP - '+SHAGNA_SITE.name+'] ':'')+`Hello! This is ${data.name}${data.invited?' ('+data.invited+')':''}. ${data.answer}. Guests: ${data.guests}.${data.message?' Message: '+data.message:''}`;
+    window.open('https://wa.me/'+(demo?SHAGNA_SITE.whatsapp:CONFIG.whatsapp)+'?text='+encodeURIComponent(txt),'_blank');
   }
   $('#thanks').style.display='block';
 });
