@@ -57,7 +57,7 @@ body.lock{overflow:hidden;height:100vh}
 .hero .ph{position:absolute;inset:0}
 .hero::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(rgba(252,246,236,.4),rgba(244,224,212,.75))}
 .hero-in{position:relative;z-index:2;max-width:760px}
-.guest{font-style:italic;color:var(--rosed);font-size:1.25rem}
+.guest{font-style:italic;font-weight:600;color:var(--rosed);font-size:clamp(1.3rem,2.6vw,2rem)}
 .names{font-size:clamp(3.3rem,14vw,7rem);color:var(--rosed);line-height:1;margin:12px 0}
 .names small{display:block;font-size:.4em;color:var(--gold)}
 .std{margin:30px 0 6px;font-size:1.05rem;letter-spacing:.7em;text-transform:uppercase;color:var(--gold);transition:letter-spacing 2.2s,opacity 2.2s;opacity:0}
@@ -155,7 +155,7 @@ body.entered #music{display:block}#music.off{opacity:.55;text-decoration:line-th
 <!-- ============ PAGE 1 : THE GATE ============ -->
 <section id="intro">
   <div class="small">A garden invitation</div>
-  <h1 class="script" id="introGuest" data-guest-template="Dear {name}, you are invited">You are invited</h1>
+  <h1 class="script" id="introGuest" data-guest-shrink data-guest-template="Dear {name}, you are invited">You are invited</h1>
   <div id="gate" role="button" tabindex="0" aria-label="Open the garden gate">
     <div class="garden"><div class="script">Welcome, dear guest</div><p>Come, walk with us into the garden…</p></div>
     <div class="leaf l"></div><div class="leaf r"></div>

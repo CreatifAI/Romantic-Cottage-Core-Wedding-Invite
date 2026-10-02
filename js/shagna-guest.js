@@ -19,7 +19,7 @@
     if(!allowed.length)allowed=all;
     els.forEach(function(e){var ids=e.getAttribute('data-event').split(/\s+/);e.hidden=!ids.some(function(id){return allowed.indexOf(id)>-1})});
     if(name){
-      each('[data-guest-template]',function(e){var t=e.getAttribute('data-guest-template').replace('{name}',function(){return name});e.textContent=t;if(t.length>34)e.classList.add('sg-long')});
+      each('[data-guest-template]',function(e){var t=e.getAttribute('data-guest-template').replace('{name}',function(){return name});e.textContent=t;if(t.length>34&&e.hasAttribute('data-guest-shrink'))e.classList.add('sg-long')});
       each('[data-guest-name]',function(e){e.textContent=name});
       each('[data-guest-input]',function(e){e.value=name});
     }
