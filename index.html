@@ -155,7 +155,7 @@ body.entered #music{display:block}#music.off{opacity:.55;text-decoration:line-th
 <!-- ============ PAGE 1 : THE GATE ============ -->
 <section id="intro">
   <div class="small">A garden invitation</div>
-  <h1 class="script" id="introGuest">You are invited</h1>
+  <h1 class="script" id="introGuest" data-guest-template="Dear {name}, you are invited">You are invited</h1>
   <div id="gate" role="button" tabindex="0" aria-label="Open the garden gate">
     <div class="garden"><div class="script">Welcome, dear guest</div><p>Come, walk with us into the garden…</p></div>
     <div class="leaf l"></div><div class="leaf r"></div>
@@ -169,7 +169,7 @@ body.entered #music{display:block}#music.off{opacity:.55;text-decoration:line-th
   <section class="hero">
     <div class="ph" data-img="hero" data-ph="Hero photo (hero)"></div>
     <div class="hero-in">
-      <div class="guest reveal" id="dear">With hearts full of love, we invite you</div>
+      <div class="guest reveal" id="dear" data-guest-template="Dear {name}, with hearts full of love, we invite you">With hearts full of love, we invite you</div>
       <h2 class="names script reveal"><span data-c="bride"></span><small>&amp;</small><span data-c="groom"></span></h2>
       <p class="reveal">to celebrate the day we promise forever,<br>in a little garden, with the people who made us who we are.</p>
       <div class="std">Save the Date</div>
@@ -194,9 +194,9 @@ body.entered #music{display:block}#music.off{opacity:.55;text-decoration:line-th
   <section class="sec">
     <div class="sub reveal">The Celebration</div><h2 class="script reveal">Join us for the day</h2><div class="lace"></div>
     <div class="grid">
-      <div class="card reveal"><div class="ic">⛪</div><h3>The Ceremony</h3><div class="t">4:00 PM</div><p><span data-c="chapel"></span><br>Vows beneath the garden arch. Please arrive by 3:30.</p></div>
-      <div class="card reveal"><div class="ic">🥂</div><h3>Garden Tea &amp; Toasts</h3><div class="t">5:00 PM</div><p>The Rose Garden<br>Sip, mingle, and share a smile with us.</p></div>
-      <div class="card reveal"><div class="ic">🕯️</div><h3>Dinner &amp; Dancing</h3><div class="t">6:30 PM</div><p><span data-c="reception"></span><br>Candlelight, music, and a first dance we hope you'll join.</p></div>
+      <div class="card reveal" data-event="ceremony"><div class="ic">⛪</div><h3>The Ceremony</h3><div class="t">4:00 PM</div><p><span data-c="chapel"></span><br>Vows beneath the garden arch. Please arrive by 3:30.</p></div>
+      <div class="card reveal" data-event="tea"><div class="ic">🥂</div><h3>Garden Tea &amp; Toasts</h3><div class="t">5:00 PM</div><p>The Rose Garden<br>Sip, mingle, and share a smile with us.</p></div>
+      <div class="card reveal" data-event="dinner"><div class="ic">🕯️</div><h3>Dinner &amp; Dancing</h3><div class="t">6:30 PM</div><p><span data-c="reception"></span><br>Candlelight, music, and a first dance we hope you'll join.</p></div>
       <div class="card note reveal"><div class="ic">🧺</div><h3>Dress Code</h3><div class="t">Garden Pastels</div><p>Blush, sage, dusty blue or cream. Please leave white for the bride.</p><div class="sw"><i style="background:#f2c4cc"></i><i style="background:#b9cba9"></i><i style="background:#a9c1d6"></i><i style="background:#f6ecd8"></i></div></div>
     </div>
   </section>
@@ -225,7 +225,7 @@ body.entered #music{display:block}#music.off{opacity:.55;text-decoration:line-th
   <section class="sec">
     <div class="sub reveal">Kindly reply by 1 May 2027</div><h2 class="script reveal">Will you be there?</h2><div class="lace"></div>
     <form id="rsvp" class="reveal">
-      <label for="n">Your name</label><input id="n" required>
+      <label for="n">Your name</label><input id="n" required data-guest-input>
       <label for="a">Your answer</label><select id="a"><option>Yes, I will joyfully be there</option><option>With love, I cannot attend</option></select>
       <label for="g">Number of guests</label><select id="g"><option>1</option><option>2</option><option>3</option><option>4</option></select>
       <label for="m">A little message for the couple</label><textarea id="m" rows="3"></textarea>
@@ -242,6 +242,14 @@ body.entered #music{display:block}#music.off{opacity:.55;text-decoration:line-th
   <button id="music" aria-label="Toggle music">♪</button>
 </main>
 
+<!-- GUEST LINKS: choose which events each group (1-5) sees. Event ids match data-event on the event cards. -->
+<script>
+window.SHAGNA={
+  labels:{ceremony:'Ceremony',tea:'Garden Tea & Toasts',dinner:'Dinner & Dancing'},
+  groups:{1:'all',2:['ceremony'],3:['tea','dinner'],4:['ceremony','dinner'],5:['tea']}
+};
+</script>
+<script src="js/shagna-guest.js"></script>
 <script>
 /* =====================  EDIT EVERYTHING HERE  ===================== */
 const CONFIG = {
@@ -265,8 +273,6 @@ const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
 $$('[data-c]').forEach(e=>e.textContent=CONFIG[e.dataset.c]);
 $('#map').href=CONFIG.mapUrl;
 $$('[data-img]').forEach(e=>{const u=CONFIG.images[e.dataset.img];if(u){e.style.backgroundImage=`url("${u}")`;e.classList.add('has')}});
-const gName=new URLSearchParams(location.search).get('guest');  // e.g. ?guest=Maria
-if(gName){$('#introGuest').textContent='Dear '+gName+', you are invited';$('#dear').textContent='Dear '+gName+', with hearts full of love, we invite you'}
 
 /* --- wrought-iron gate with roses --- */
 const rose=(x,y,r)=>`<g><circle cx="${x}" cy="${y}" r="${r}" fill="#ebaab5"/><circle cx="${x}" cy="${y}" r="${r*.7}" fill="#dd8798"/><circle cx="${x}" cy="${y}" r="${r*.4}" fill="#c76a7f"/><path d="M${x-r*.35} ${y} q${r*.35} ${-r*.5} ${r*.7} 0" stroke="#fbe3e7" fill="none" stroke-width="1.3"/></g>`;
@@ -345,11 +351,11 @@ tick();setInterval(tick,1000);
 /* --- RSVP: WhatsApp (default) or form endpoint --- */
 $('#rsvp').addEventListener('submit',async e=>{
   e.preventDefault();
-  const data={name:$('#n').value,answer:$('#a').value,guests:$('#g').value,message:$('#m').value};
+  const data={name:$('#n').value,answer:$('#a').value,guests:$('#g').value,message:$('#m').value,invited:(window.SHAGNA_GUEST||{}).rsvpText||''};
   if(CONFIG.formEndpoint){
     try{await fetch(CONFIG.formEndpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})}catch(err){}
   }else{
-    const txt=`Hello! This is ${data.name}. ${data.answer}. Guests: ${data.guests}.${data.message?' Message: '+data.message:''}`;
+    const txt=`Hello! This is ${data.name}${data.invited?' ('+data.invited+')':''}. ${data.answer}. Guests: ${data.guests}.${data.message?' Message: '+data.message:''}`;
     window.open('https://wa.me/'+CONFIG.whatsapp+'?text='+encodeURIComponent(txt),'_blank');
   }
   $('#thanks').style.display='block';
